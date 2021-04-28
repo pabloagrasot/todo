@@ -7,7 +7,8 @@ const config = {
 	},
 
 	db: {
-		MongoAtlas_URI :'mongodb+srv://PabloAgrasot:mypass321@todo.6g28c.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+		MongoAtlas_URI :'mongodb+srv://PabloAgrasot:mypass321@todo.6g28c.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+		collection: 'users'
 	}
 }
 

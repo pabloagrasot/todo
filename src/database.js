@@ -8,6 +8,7 @@ const options = {
 }
 
 mongoose.connect( config.db.MongoAtlas_URI || 'mongodb://localhost/todo', options)
+
 	.then(db => console.log('DB is conectd'))
 	.catch(err =>console.log(err))
 	

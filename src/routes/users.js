@@ -14,7 +14,6 @@ router.get('/users/registro', function (req, res) {
 
 
   router.post('/users/registro', 
-    middlewares.verifyUser,
 	  controllers.signUp,
     function (req, res) {
     console.log(req.body)

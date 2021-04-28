@@ -1,6 +1,7 @@
 import models from '../models'
 import jwt from 'jsonwebtoken'
 import config from '../config'
+import mongoose from 'mongoose'
 
 const signIn = async (req, res) => {
 	try {
@@ -28,27 +29,25 @@ const signIn = async (req, res) => {
 }
 
 const signUp = async (req, res) => {
-	try {
-		const { username, email, password, roles } = req.body
 
-		let $roles = []
-		if (!roles) {
-			const role = await models.role.findOne({ name: 'user' })
-			$roles.push(role._id)
-		} else {
-			const roleList = await models.role.find({ name: { $in: roles }})
-			$roles = roleList.map((role) => role._id)
-		}
+	const user = new models.user(
+		{
+		username: req.body.username,
+		email: req.body.email,
+		password : await models.user.encode(req.body.password),
+		roles: 'user',
+		id: mongoose.Types.ObjectId()
+	})
+	user.save()
+	.then(result=>{
+		res.status(201).json({ message: 'Nuevo usuario' })
+	})
 
-		const $password = await models.user.encode(password)
-
-		const user = await models.user({ username, email, password:$password, roles:$roles }).save()
-
-		res.status(201).json({ user })
-	} catch (err) {
-		res.status(400).json({ err: err.message })
-	}
-}
+	.catch(err => {
+		console.log(err)
+		res.status(500).json({ error: err })
+	})
+} 
 
 export default {
 	signIn,

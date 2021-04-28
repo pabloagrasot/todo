@@ -6,6 +6,7 @@ import models from '../models/'
 
 const user = (id) => {
 	return models.user.findById({ _id: id })
+	
 }
 
 const token = async (token, name) => {

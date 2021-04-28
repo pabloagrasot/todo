@@ -8,10 +8,10 @@ import config from './config'
 // Initializations
 const app = express()
 require ('./database')
-
+ 
 
 // Settings
-app.set('port', process.env.PORT || 4300)
+app.set('port', process.env.PORT || 1100)
 app.set('secret', config.jwt.secret);
 app.set('view engine', pug)
 app.set('views', path.join(__dirname, 'views'))
